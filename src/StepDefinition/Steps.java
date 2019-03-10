@@ -29,13 +29,26 @@ public class Steps {
 
     WebDriver driver;
 
+
+
+    /*==================================Login, compose===============================================*/
+
+    @Given("^I am logged into a gmail account$")
+    public void given_i_am_logged_in() throws Throwable
+    {
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://mail.google.com/mail/u/0/#inbox");
+    }
+
     @Given("^Open the Firefox and launch the application$")
     public void open_the_Firefox_and_launch_the_application() throws Throwable
     {
         System.setProperty("webdriver.chrome.driver", "chromedriver");
-        driver= new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("http://demo.guru99.com/v4");
+        driver.get("https://mail.google.com/mail/u/0/#inbox");
     }
 
     @When("^Enter the Username and Password$")
