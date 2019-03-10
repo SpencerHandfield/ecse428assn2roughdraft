@@ -75,23 +75,26 @@ public class Steps {
 
     public void logIn()
     {
+        //find the email field and send the address to it
+        //set up a waiting time, then find the next button and click it
         driver.findElement(By.className("whsOnd")).sendKeys(email);
-        WebElement nextBTN = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.elementToBeClickable(By.className("qhFLie")));
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement next = wait.until(ExpectedConditions.elementToBeClickable(By.className("qhFLie")));
+        next.click();
 
-        nextBTN.click();
-
+        //wait for page to load
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        //repeat above process but with the password
+        //find the next button after waiting and click
         driver.findElement(By.className("whsOnd")).sendKeys(email_password);
-        nextBTN = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.elementToBeClickable(By.className("qhFLie")));
-
-        nextBTN.click();
+        wait = new WebDriverWait(driver, 10);
+        next = wait.until(ExpectedConditions.elementToBeClickable(By.className("qhFLie")));
+        next.click();
     }
 
 }
