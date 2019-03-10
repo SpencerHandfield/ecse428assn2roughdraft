@@ -9,9 +9,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -37,7 +35,7 @@ public class Steps {
 
     /*==================================Login, compose===============================================*/
 
-    @Given("^Open the Firefox and launch the application$")
+    @Given("^I am logged into a gmail account$")
     public void given_i_am_logged_in() throws Throwable
     {
         System.setProperty("webdriver.chrome.driver", "chromedriver");
@@ -45,36 +43,27 @@ public class Steps {
         driver.manage().window().maximize();
         driver.get("https://mail.google.com/mail/u/0/#inbox");
         logIn();
+    }
+
+    @And("^I click the compose button$")
+    public void click_the_compose_button() throws Throwable
+    {
         clickCompose();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        addRecipient();
-    }
-//
-//    @Given("^Open the Firefox and launch the application$")
-//    public void open_the_Firefox_and_launch_the_application() throws Throwable
-//    {
-//        System.setProperty("webdriver.chrome.driver", "chromedriver");
-//        driver = new ChromeDriver();
-//        driver.manage().window().maximize();
-//        driver.get("https://mail.google.com/mail/u/0/#inbox");
-//    }
 
-    @When("^Enter the Username and Password$")
-    public void enter_the_Username_and_Password() throws Throwable
-    {
-        driver.findElement(By.name("uid")).sendKeys("username12");
-        driver.findElement(By.name("password")).sendKeys("password12");
     }
 
-    @Then("^Reset the credential$")
-    public void Reset_the_credential() throws Throwable
+    @Then("^I enter a recipient email in the \"To:\" field$")
+    public void enter_recipient_email() throws Throwable
     {
-        driver.findElement(By.name("btnReset")).click();
+       addRecipient();
     }
+
+    @Then("^I attach an image file$")
+    public void attach_image() throws Throwable
+    {
+       //TODO
+    }
+
 
     /*=======================HELPER FUNCTIONS==============================*/
 
@@ -126,6 +115,6 @@ public class Steps {
     public void addRecipient()
     {
         //send the email to the email (just use the same one)
-        driver.findElement(By.className("v0")).sendKeys(email);
+        driver.findElement(By.className("vO")).sendKeys(email);
     }
 }
