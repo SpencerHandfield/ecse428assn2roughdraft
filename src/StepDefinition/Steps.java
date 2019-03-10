@@ -97,4 +97,16 @@ public class Steps {
         next.click();
     }
 
+    public boolean checkIfImageAttached()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement existingAttachment = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("vI")));
+        if (existingAttachment.getText().equals(""))
+        {
+            return false; //there is no attachment
+        }else { //there is an attachment
+            return true;
+        }
+    }
+
 }
