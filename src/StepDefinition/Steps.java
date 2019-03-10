@@ -55,7 +55,8 @@ public class Steps {
     @Then("^I enter a recipient email and subject$")
     public void enter_recipient_email_and_subject() throws Throwable
     {
-       addContents();
+        Thread.sleep(2000);
+        addContents();
 
     }
 
