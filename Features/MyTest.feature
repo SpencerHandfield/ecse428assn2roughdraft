@@ -3,7 +3,7 @@ Feature: Test the sending of an email with an image attachment
   Scenario: Sending an appropriate sized image to a recipient
     Given I am logged into a gmail account
     And I click the compose button
-    Then I enter a recipient email in the "To:" field
+    Then I enter a recipient email and subject
     Then I attach an image file
     Then The image will be attached
     Then I click send with the image attached

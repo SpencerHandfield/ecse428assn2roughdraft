@@ -52,23 +52,32 @@ public class Steps {
 
     }
 
-    @Then("^I enter a recipient email in the \"To:\" field$")
-    public void enter_recipient_email() throws Throwable
+    @Then("^I enter a recipient email and subject$")
+    public void enter_recipient_email_and_subject() throws Throwable
     {
-       addRecipient();
+       addContents();
+
     }
 
     @Then("^I attach an image file$")
     public void attach_image() throws Throwable
     {
        attachImage();
-       Thread.sleep(10000);
+       Thread.sleep(5000); //wait for image to upload
+    }
+
+    @Then("^The image will be attached$")
+    public void check_if_image_attached() throws Throwable
+    {
+        Assert.assertTrue(checkIfImageAttached());
+        if(checkIfImageAttached())
+            System.out.println("There is an image attached");
     }
 
     @Then("^I click send with the image attached$")
-    public void send_the_image() throws Throwable
+    public void send_the_email() throws Throwable
     {
-        sendImage();
+        sendEmail();
     }
 
 
@@ -85,9 +94,9 @@ public class Steps {
         WebElement next = wait.until(ExpectedConditions.elementToBeClickable(By.className("qhFLie")));
         next.click();
 
-        //wait for page to load
+        //wait to ensure page loads properly
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -119,10 +128,12 @@ public class Steps {
         WebElement compose = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("z0")));
         compose.click();
     }
-    public void addRecipient()
+    public void addContents()
     {
         //send the email to the email (just use the same one)
         driver.findElement(By.className("vO")).sendKeys(email);
+        driver.findElement(By.className("aoT")).sendKeys("testsubject");
+        //driver.findElement(By.className("???")).sendKeys("testbody");
     }
     public void attachImage(){
         //wait until find the attach button, then click it
@@ -132,9 +143,10 @@ public class Steps {
 
     }
 
-    public void sendImage(){
+    public void sendEmail(){
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement send = wait.until(ExpectedConditions.elementToBeClickable(By.className("gU")));
         send.click(); // Click send button
     }
+
 }
