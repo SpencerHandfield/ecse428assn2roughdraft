@@ -61,7 +61,14 @@ public class Steps {
     @Then("^I attach an image file$")
     public void attach_image() throws Throwable
     {
-       //TODO
+       attachImage();
+       Thread.sleep(10000);
+    }
+
+    @Then("^I click send with the image attached$")
+    public void send_the_image() throws Throwable
+    {
+        sendImage();
     }
 
 
@@ -116,5 +123,18 @@ public class Steps {
     {
         //send the email to the email (just use the same one)
         driver.findElement(By.className("vO")).sendKeys(email);
+    }
+    public void attachImage(){
+        //wait until find the attach button, then click it
+        String imageLocation = System.getProperty("user.dir") + "/Images/lion.jpg";
+        driver.findElement(By.xpath("//input[@type='file']")).sendKeys(imageLocation);  // Upload image
+        System.out.println("Uploading a file.. ");
+
+    }
+
+    public void sendImage(){
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement send = wait.until(ExpectedConditions.elementToBeClickable(By.className("gU")));
+        send.click(); // Click send button
     }
 }
