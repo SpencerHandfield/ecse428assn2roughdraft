@@ -35,7 +35,7 @@ Feature: Test the sending of an email with an image attachment
     And I do not fill in the "To:" field for recipient
     Then I click send
     Then the email with attachment does not send
-    //And I am prompted to fill in the “To:”
+    And I am prompted to fill in the “To:”
 
   Scenario: Attempting to send an image attachment that is too large
     Given I am logged into a gmail account

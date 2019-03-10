@@ -29,27 +29,32 @@ public class Steps {
 
     WebDriver driver;
 
+    //defining values
+    String email = "imagesofcucumbers@gmail.com";
+    String email_password = "fourtwoeight";
+
 
 
     /*==================================Login, compose===============================================*/
 
-    @Given("^I am logged into a gmail account$")
+    @Given("^Open the Firefox and launch the application$")
     public void given_i_am_logged_in() throws Throwable
     {
         System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://mail.google.com/mail/u/0/#inbox");
+        logIn();
     }
-
-    @Given("^Open the Firefox and launch the application$")
-    public void open_the_Firefox_and_launch_the_application() throws Throwable
-    {
-        System.setProperty("webdriver.chrome.driver", "chromedriver");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://mail.google.com/mail/u/0/#inbox");
-    }
+//
+//    @Given("^Open the Firefox and launch the application$")
+//    public void open_the_Firefox_and_launch_the_application() throws Throwable
+//    {
+//        System.setProperty("webdriver.chrome.driver", "chromedriver");
+//        driver = new ChromeDriver();
+//        driver.manage().window().maximize();
+//        driver.get("https://mail.google.com/mail/u/0/#inbox");
+//    }
 
     @When("^Enter the Username and Password$")
     public void enter_the_Username_and_Password() throws Throwable
@@ -63,4 +68,30 @@ public class Steps {
     {
         driver.findElement(By.name("btnReset")).click();
     }
+
+    /*=======================HELPER FUNCTIONS==============================*/
+
+    //logging in automatically
+
+    public void logIn()
+    {
+        driver.findElement(By.className("whsOnd")).sendKeys(email);
+        WebElement nextBTN = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.elementToBeClickable(By.className("qhFLie")));
+
+        nextBTN.click();
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.className("whsOnd")).sendKeys(email_password);
+        nextBTN = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.elementToBeClickable(By.className("qhFLie")));
+
+        nextBTN.click();
+    }
+
 }
