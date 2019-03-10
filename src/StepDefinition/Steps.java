@@ -45,6 +45,13 @@ public class Steps {
         driver.manage().window().maximize();
         driver.get("https://mail.google.com/mail/u/0/#inbox");
         logIn();
+        clickCompose();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        addRecipient();
     }
 //
 //    @Given("^Open the Firefox and launch the application$")
@@ -109,4 +116,16 @@ public class Steps {
         }
     }
 
+    public void clickCompose()
+    {
+        //wait until find the compose button, then click it
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement compose = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("z0")));
+        compose.click();
+    }
+    public void addRecipient()
+    {
+        //send the email to the email (just use the same one)
+        driver.findElement(By.className("v0")).sendKeys(email);
+    }
 }
