@@ -80,6 +80,8 @@ public class Steps {
     {
         //find the email field and send the address to it
         //set up a waiting time, then find the next button and click it
+        System.out.println("Logging In...");
+
         driver.findElement(By.className("whsOnd")).sendKeys(email);
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement next = wait.until(ExpectedConditions.elementToBeClickable(By.className("qhFLie")));
@@ -115,6 +117,7 @@ public class Steps {
     public void clickCompose()
     {
         //wait until find the compose button, then click it
+        System.out.println("Clicking Compose...");
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement compose = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("z0")));
         compose.click();
@@ -122,10 +125,12 @@ public class Steps {
     public void addRecipient()
     {
         //send the email to the email (just use the same one)
+        System.out.println("Adding recipient...");
         driver.findElement(By.className("vO")).sendKeys(email);
     }
     public void attachImage(){
         //wait until find the attach button, then click it
+        System.out.println("Attaching Image...");
         String imageLocation = System.getProperty("user.dir") + "/Images/lion.jpg";
         driver.findElement(By.xpath("//input[@type='file']")).sendKeys(imageLocation);  // Upload image
         System.out.println("Uploading a file.. ");
@@ -133,6 +138,7 @@ public class Steps {
     }
 
     public void sendImage(){
+        System.out.println("Sending Image...");
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement send = wait.until(ExpectedConditions.elementToBeClickable(By.className("gU")));
         send.click(); // Click send button
